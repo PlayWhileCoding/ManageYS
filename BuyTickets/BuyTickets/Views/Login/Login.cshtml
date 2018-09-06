@@ -1,0 +1,92 @@
+﻿@model BuyTickets.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<style>
+    .center {
+        position: absolute; 
+        right:50%;
+        left:50%;
+        margin-left:-50%;
+    }
+
+    .test {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        height: auto;
+    }
+    .divform {
+        border-radius: 15px;
+        background-color: whitesmoke;
+        padding: 50px;
+        width: 300px;
+    }
+
+    body {
+        background-image: url('../../Content/Resources/BackgroundLogin.jpg');
+        background-repeat: no-repeat;
+        background-attachment:fixed;
+        background-size: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        text-align:center;
+    }
+
+    @@media screen and (max-width: 600px){
+       body{
+           align-items:flex-start;
+       }
+       .divform{
+           padding:10px;
+       }
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+<body>
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    
+        <div class="divform">
+            <h2>Login</h2>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-success text-center" />
+            </div>
+
+            <div>
+                @Html.ActionLink("Forgot password?","ResetPass",new { @class = "btn btn-success" })
+           
+            </div>
+        </div>
+        
+    
+</body>
+}
+
